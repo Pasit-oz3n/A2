@@ -1,55 +1,65 @@
 #Pasit Nualprasertsuk 69-010126-1030-7 20
 import random
 
-grid_s = [10,10]
-scr_size = [500,500]
+class Candy(object):
+    def __init__(self,type_id,x,y):
+        self.type_id = type_id
+        self.x = x
+        self.y = y
+        self.is_select = False
 
-g = []
-def get_candy(grid,grid_size):
-    i = 0
-    while i < grid_size[0]+3:
-        gridy = []
-        j = 0
-        while j < grid_size[1]+3:
-            gridy.append(0)
-            j = j + 1
-        i = i + 1
+class Board(object):
+    def __init__(self, column = 10 , row = 10):
+        self.column = column
+        self.row = row
+        self.grid = []
+        self.candy = [Candy(0,x,y)]
         
-def setup():
-    size(scr_size[0],scr_size[1])
-    stroke(2)
-    strokeWeight(3)
-    get_candy(g,grid_s)
-
-def fillin(grid_x,grid_y,matrix):
-    y = 0
-    while y < grid_y:
+    def get_candy(self):
+        self.grid = []
         i = 0
-        while i < grid_x:
-            if matrix[y][x] == 0:
-                matrix[y][x] = random.randint(1,4)
-            x = x + 1
-        y = y + 1
+        while i < self.row + 3:
+            row_grid = []
+            j = 0
+            while j < self.column + 3:
+                row_grid.append(0)
+                j = j + 1
+            self.grid.append(row_grid)
+            i = i + 1
     
-
-def visual(grid_x,grid_y,scr_sizex,scr_sizey,matrix):
-    colour = [[255,0,0],
-              [0,255,0],
-              [0,0,255],
-              [255,0,255]]
-    
-    
-    
-
-#def three_del(grid_x,grid_y,matrix):
-    
-
-#def fall(grid_x,grid_y,matrix):
-    
-#def mousePressed():
+    def fillin(self):
+        i = 0
+        while i < self.row:
+            j = 0
+            while j < self.column:
+                if self.grid[i][j] == 0:
+                    self.grid[i][j] == random.randint[1,4]
+                j = j + 1
+            i = i + 1
+    #def fall(self):
         
+            
+    #def three_del(self):
+        #i = 0
 
-def draw():
-    background(255)
+class Game(object):
+    def __init__(self,scr_x = 500,scr_y = 500):
+        self.scr_size = (scr_x, scr_y)
+        self.board = Board(10,10)
+        self.grid_per_sqr = scr_x // self.board.column
+        
+    def setup(self):
+        size(self.scr_size[0],self.scr_size[1])
+        stroke(2)
+        strokeWeight(3)
+        self.board.get_candy()
+    
+   '''def draw():
+       background(240)
+       self.board.fillin()
+       self.board.fall()
+      ''' 
+
+board_size = Board(10,10)
     
     
