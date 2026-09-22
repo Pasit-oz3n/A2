@@ -39,9 +39,22 @@ class Board(object):
     #def fall(self):
         
             
-    #def three_del(self):
-        #i = 0
-
+    """def three_del(self):
+        sorting = False
+        i = 0
+        while i < len(self.grid):
+            j = 0
+            while j < len(self.grid):
+                if self.grid[i][j] == self.grid[i+1][j]: # y axis
+                    count = count + 1
+                    if count > 2 and count < 6:
+                    
+    
+                
+                elif self.grid[i][j] == self.grid[i][j+1]: # x axis
+           """     
+                
+            
 class Game(object):
     def __init__(self,scr_x = 500,scr_y = 500):
         self.scr_size = (scr_x, scr_y)
@@ -54,11 +67,11 @@ class Game(object):
         strokeWeight(3)
         self.board.get_candy()
     
-   '''def draw():
+   def draw():
        background(240)
        self.board.fillin()
        self.board.fall()
-      ''' 
+       
 
 board_size = Board(10,10)
     
