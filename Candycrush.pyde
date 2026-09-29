@@ -144,11 +144,11 @@ class Game(object):
                 tmp = self.board.grid[i][j]
                 if tmp != 0:
                     if tmp == 1:
-                        fill(230, 80, 80)  
+                        fill(255, 0, 0)  
                     elif tmp == 2:
-                        fill(80, 200, 80)  
+                        fill(0, 255, 0)  
                     elif tmp == 3:
-                        fill(80, 120, 230)  
+                        fill(0, 0, 255)  
                     elif tmp == 4:
                         fill(240, 200, 60)
                         
