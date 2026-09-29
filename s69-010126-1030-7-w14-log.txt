@@ -1,7 +1,0 @@
-5913c22 (HEAD -> main, origin/main, origin/HEAD) class update + Merge W13-update.pdf with Function Design.pdf
-1b52acb Function Update
-a59d64e Merge branch 'main' of https://github.com/Pasit-oz3n/A2
-8d9f5a2 Function Update
-3bf0cef Delete sketch.properties
-4687e9c (tag: v0.01) Initial commit
-20a848c (tag: Processing) Initiaal commit
