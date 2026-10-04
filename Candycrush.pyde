@@ -1,5 +1,6 @@
 #Pasit Nualprasertsuk 69-010126-1030-7 20
 import random
+import os
 
 class Candy(object):
     def __init__(self,type_id,x,y):
@@ -35,7 +36,65 @@ class Board(object):
                     self.grid[i][j] = random.randint(1,4)
                 j = j + 1
             i = i + 1
-            
+    
+    def save_board(self, filename="savegame.txt"):
+        lines = []
+        i = 0
+        while i < self.row:
+            row_str = ""
+            j = 0
+            while j < self.column:
+                candy = self.grid[i][j]
+                char = "R"
+
+                if candy != None:
+                    if candy == 1:
+                        char = "R"
+                    elif candy == 2:
+                        char = "G"
+                    elif candy == 3:
+                        char = "B"
+                    elif candy == 4:
+                        char = "Y"
+
+                row_str = row_str + char
+                j = j + 1
+
+            lines.append(row_str)
+            i = i + 1
+
+        saveStrings(filename, lines)
+        println("Saved successfully")
+    
+    def load_board(self, filename="savegame.txt"):
+        lines = loadStrings(filename)
+        if lines == None:
+            println("Error: Save file not found!")
+            return
+
+        i = 0
+        while i < self.row and i < len(lines):
+            line_data = lines[i].strip()
+            j = 0
+            while j < self.column and j < len(line_data):
+                char = line_data[j]
+                tmp = 1
+
+                if char == "R":
+                    tmp = 1
+                elif char == "G":
+                    tmp = 2
+                elif char == "B":
+                    tmp = 3
+                elif char == "Y":
+                    tmp = 4
+                    
+                self.grid[i][j] = tmp
+                j = j + 1
+            i = i + 1
+
+        println("Loaded successfully")
+                    
     def three_del(self):
         delete = []
         i = 0
@@ -169,8 +228,7 @@ class Game(object):
             stroke(255, 50, 50)
             strokeWeight(3)
             ellipse(cx, cy, d + 20, d + 20)
-                
-                        
+                    
     def mousePressed(self):
         x = mouseX // self.grid_per_sqr
         y = mouseY // self.grid_per_sqr
@@ -194,9 +252,15 @@ class Game(object):
                     self.board.grid[y1][x1] = self.board.grid[y2][x2]
                     self.board.grid[y2][x2] = tmp
                 self.click = []
-                
+    
+    def keyPressed(self):
+        if key == "s" or key == "S":
+            self.board.save_board("savegame.txt")
+        elif key == "l" or key == "L":
+            self.board.load_board("savegame.txt")
+                    
     def draw(self):
-        background(240)
+        background(245)
         self.board.three_del()
         self.board.fall()
         self.visual()
@@ -214,3 +278,6 @@ def draw():
 
 def mousePressed():
     game.mousePressed()
+
+def keyPressed():
+    game.keyPressed()
