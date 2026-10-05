@@ -46,7 +46,7 @@ class Board(object):
                 candy = self.grid[i][j]
                 char = "R"
 
-                if candy != None:
+                if candy != 0:
                     if candy == 1:
                         char = "R"
                     elif candy == 2:
@@ -61,32 +61,46 @@ class Board(object):
 
             lines.append(row_str)
             i = i + 1
-
-        saveStrings(filename, lines)
+            
+        with open(filename,"w")as file:
+            i = 0
+            while i < len(lines):
+                file.write(lines[i]+"\n")
+                i = i + 1
     
     def load_board(self, filename):
-        lines = loadStrings(filename)
-        if lines == None:
+        lines = []
+        with open(filename,"r")as file:
+            for line in file:
+                tmp = ""
+                for char in line:
+                    if char != "\n" and char != "\r" :
+                        tmp = tmp + char
+                if len(tmp) > 0:
+                    lines.append(tmp)
+                    
+        if len(lines) == 0:
             return
-
+        
+        self.get_candy()
+        
         i = 0
         while i < self.row and i < len(lines):
-            line_data = lines[i].strip()
             j = 0
-            while j < self.column and j < len(line_data):
-                char = line_data[j]
-                tmp = 1
-
-                if char == "R":
-                    tmp = 1
-                elif char == "G":
-                    tmp = 2
-                elif char == "B":
-                    tmp = 3
-                elif char == "Y":
-                    tmp = 4
+            while j < self.column and j < len(lines[i]):
+                tmp = lines[i][j]
+                temporary = 0
+                
+                if tmp == "R":
+                    temporary = 1
+                elif tmp == "G":
+                    temporary = 2
+                elif tmp == "B":
+                    temporary = 3
+                elif tmp == "Y":
+                    temporary = 4
                     
-                self.grid[i][j] = tmp
+                self.grid[i][j] = temporary
                 j = j + 1
             i = i + 1
                     
