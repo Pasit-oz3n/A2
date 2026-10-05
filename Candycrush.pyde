@@ -7,7 +7,6 @@ class Candy(object):
         self.type_id = type_id
         self.x = x
         self.y = y
-        self.is_select = False
 
 class Board(object):
     def __init__(self, column = 10 , row = 10):
@@ -37,7 +36,7 @@ class Board(object):
                 j = j + 1
             i = i + 1
     
-    def save_board(self, filename="savegame.txt"):
+    def save_board(self, filename):
         lines = []
         i = 0
         while i < self.row:
@@ -64,12 +63,10 @@ class Board(object):
             i = i + 1
 
         saveStrings(filename, lines)
-        println("Saved successfully")
     
-    def load_board(self, filename="savegame.txt"):
+    def load_board(self, filename):
         lines = loadStrings(filename)
         if lines == None:
-            println("Error: Save file not found!")
             return
 
         i = 0
@@ -92,8 +89,6 @@ class Board(object):
                 self.grid[i][j] = tmp
                 j = j + 1
             i = i + 1
-
-        println("Loaded successfully")
                     
     def three_del(self):
         delete = []
@@ -255,9 +250,9 @@ class Game(object):
     
     def keyPressed(self):
         if key == "s" or key == "S":
-            self.board.save_board("savegame.txt")
+            self.board.save_board("save.txt")
         elif key == "l" or key == "L":
-            self.board.load_board("savegame.txt")
+            self.board.load_board("save.txt")
                     
     def draw(self):
         background(245)
